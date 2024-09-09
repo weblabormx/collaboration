@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace WeblaborMx\Collaboration\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class CollaborationCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'collaboration';
 
     public $description = 'My command';
 
