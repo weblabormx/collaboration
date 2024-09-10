@@ -1,4 +1,5 @@
 <?php
+
 namespace WeblaborMx\Collaboration\Tests\Unit;
 
 use App\Models\Park;
@@ -10,27 +11,27 @@ class VisibilityTest extends TestCase
 {
     use RefreshDatabase;
 
-   /** @test */
-   public function a_new_user_sees_their_own_park_but_its_not_publicly_visible_until_validated()
-   {
-       // Crear un usuario nuevo sin validaciones previas
-       $user = User::factory()->create();
-       $this->actingAs($user);
+    /** @test */
+    public function a_new_user_sees_their_own_park_but_its_not_publicly_visible_until_validated()
+    {
+        // Crear un usuario nuevo sin validaciones previas
+        $user = User::factory()->create();
+        $this->actingAs($user);
 
-       // Simular la creación de un parque
-       $park = Park::create([
-           'name' => 'Hidden Park',
-           'location' => 'Unknown Location',
-       ]);
+        // Simular la creación de un parque
+        $park = Park::create([
+            'name' => 'Hidden Park',
+            'location' => 'Unknown Location',
+        ]);
 
-       // Verificar que el usuario puede ver su propio parque
-       $this->assertTrue($park->is_visible);
+        // Verificar que el usuario puede ver su propio parque
+        $this->assertTrue($park->is_visible);
 
-       // Verificar que el parque no es visible para otros usuarios
-       $otherUser = User::factory()->create();
-       $this->actingAs($user);
-       $this->assertFalse($park->is_visible);
-   }
+        // Verificar que el parque no es visible para otros usuarios
+        $otherUser = User::factory()->create();
+        $this->actingAs($user);
+        $this->assertFalse($park->is_visible);
+    }
 
     /** @test */
     public function an_admin_or_validated_user_can_validate_and_publish_a_park()
@@ -38,7 +39,7 @@ class VisibilityTest extends TestCase
         // Crear un usuario nuevo y un administrador
         $user = User::factory()->create();
         $this->actingAs($user);
-        
+
         // Crear un parque que aún no está validado
         $park = Park::create([
             'name' => 'Hidden Park',

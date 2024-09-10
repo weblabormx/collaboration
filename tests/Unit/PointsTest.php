@@ -1,4 +1,5 @@
 <?php
+
 namespace WeblaborMx\Collaboration\Tests\Unit;
 
 use App\Models\Park;
@@ -154,7 +155,7 @@ class PointsTest extends TestCase
         $park->markAsFalse();
 
         // Remove the park if the user that created it marked as invalid
-        $this->assertTrue(!is_null($park->deleted_at));
+        $this->assertTrue(! is_null($park->deleted_at));
 
         // Verificar que el usuario ganó 10 puntos
         $this->assertEquals(0, $user->points);
@@ -182,12 +183,12 @@ class PointsTest extends TestCase
         $this->assertEquals(5, $user->points);
 
         // if 5 users with reputation vote we accept the field
-        for($i = 0; $i < 5; $i++) {
+        for ($i = 0; $i < 5; $i++) {
             $user = User::factory()->create();
             $user->addPoints(10);
             $field = $park->validateField('neighboorhood');
         }
-        
+
         $this->assertTrue($field->is_validated);
     }
 
@@ -200,7 +201,7 @@ class PointsTest extends TestCase
         // Simular 10 modificaciones correctas en parques
         for ($i = 0; $i < 10; $i++) {
             $park = Park::factory()->create();
-            $park->update(['name' => 'Corrected Park Name ' . $i]);
+            $park->update(['name' => 'Corrected Park Name '.$i]);
         }
 
         // Simular el bono por 10 modificaciones correctas consecutivas
